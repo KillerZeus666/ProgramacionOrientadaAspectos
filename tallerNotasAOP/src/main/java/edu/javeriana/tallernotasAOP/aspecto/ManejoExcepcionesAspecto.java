@@ -1,7 +1,6 @@
 package edu.javeriana.tallernotasAOP.aspecto;
 
 import edu.javeriana.tallernotasAOP.error.RespuestaError;
-import edu.javeriana.tallernotasAOP.excepcion.RegistroNoEncontradoException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.springframework.http.HttpStatus;
@@ -26,9 +25,9 @@ public class ManejoExcepcionesAspecto {
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    // Método específico para manejar excepciones de tipo RegistroNoEncontrado
+    // Método específico para manejar excepciones de tipo RuntimeException (cuando no se encuentra un registro)
     @AfterThrowing(pointcut = "execution(* edu.javeriana.tallernotasAOP.controlador.*.get*(..))", throwing = "ex")
-    public ResponseEntity<RespuestaError> manejarRegistroNoEncontrado(RegistroNoEncontradoException ex) {
+    public ResponseEntity<RespuestaError> manejarRegistroNoEncontrado(RuntimeException ex) {
         List<String> detalles = new ArrayList<>();
         detalles.add(ex.getLocalizedMessage());
         RespuestaError error = new RespuestaError("Registro No Encontrado", detalles);
