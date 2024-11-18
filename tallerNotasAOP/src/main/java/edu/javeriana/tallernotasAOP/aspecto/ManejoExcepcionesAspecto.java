@@ -20,7 +20,6 @@ public class ManejoExcepcionesAspecto {
         List<String> detalles = new ArrayList<>();
         detalles.add(ex.getLocalizedMessage());
 
-        // Puedes personalizar los mensajes según el tipo de excepción
         RespuestaError error = new RespuestaError("Error Interno del Servidor", detalles);
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -65,3 +65,4 @@ public class Estudiante {
         this.notas = notas;
     }
 }
+
