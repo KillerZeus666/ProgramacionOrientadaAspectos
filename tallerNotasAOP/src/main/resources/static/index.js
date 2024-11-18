@@ -138,12 +138,8 @@ function borrarEstudiante(id) {
         }
     };
 }
-
 function notasEstudiante(id) {
-    // Lógica para mostrar las notas del estudiante (por ejemplo, un modal o una nueva página).
-    Swal.fire({
-        title: "Notas del Estudiante",
-        text: "Aquí se mostrarán las notas del estudiante con ID: " + id,
-        confirmButtonText: "Cerrar"
-    });
+    // Redirigir a la página de notas, pasando el ID del estudiante como parámetro en la URL.
+    window.location.href = `notas.html?estudianteId=${id}`;
 }
+
