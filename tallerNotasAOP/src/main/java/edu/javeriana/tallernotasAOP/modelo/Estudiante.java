@@ -1,6 +1,5 @@
 package edu.javeriana.tallernotasAOP.modelo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.Set;
 
@@ -12,11 +11,12 @@ public class Estudiante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     private String nombre;
     private String apellido;
     private String correo;
 
-    @OneToMany(mappedBy = "estudiante_id")
+    @OneToMany(mappedBy = "estudiante")  // Esto debe coincidir con el nombre del campo en la clase Nota
     private Set<Nota> notas;
 
     // Métodos Getter y Setter manuales

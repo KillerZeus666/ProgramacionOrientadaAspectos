@@ -1,11 +1,7 @@
 package edu.javeriana.tallernotasAOP.modelo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,12 +10,17 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "nota")
 public class Nota {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String observacion;
     private Double valor;
     private Double porcentaje;
-    private Integer estudiante_id;
+
+    @ManyToOne
+    @JoinColumn(name = "estudiante_id")  // Esta es la columna que mapea la relación
+    private Estudiante estudiante;
 
 }
