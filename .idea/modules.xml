@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/tallerNotasAOP.iml" filepath="$PROJECT_DIR$/.idea/tallerNotasAOP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tallerNotasAOP/tallerNotasAOP.iml" filepath="$PROJECT_DIR$/tallerNotasAOP/tallerNotasAOP.iml" />
     </modules>
   </component>
 </project>

@@ -1,5 +1,6 @@
 package edu.javeriana.tallernotasAOP.controlador;
 
+import edu.javeriana.tallernotasAOP.servicio.NotaService;
 import edu.javeriana.tallernotasAOP.modelo.Nota;
 import edu.javeriana.tallernotasAOP.repositorio.RepositorioNota;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,33 +8,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ArrayList; // Asegúrate de importar ArrayList
+import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/notas")
 public class ControladorNota {
+
+    private final NotaService notaService;
 
     @Autowired
     private RepositorioNota repositorioNota;
 
-    @GetMapping("/notas")
-    public List<Nota> traerTodas() {
-        return repositorioNota.findAll();
+    public ControladorNota(NotaService notaService) {
+        this.notaService = notaService;
     }
 
-    @GetMapping("/nota/{id}")
-    public ResponseEntity<Nota> traeNota(@PathVariable Integer id) {
-        // Si la nota no se encuentra, el Aspecto manejará la excepción
-        Nota nota = repositorioNota.findById(id).orElse(null);
-
-        if (nota == null) {
-            return ResponseEntity.notFound().build(); // Retornamos un 404 si no se encuentra la nota
-        }
-
-        return ResponseEntity.ok(nota);  // Si se encuentra, retornamos un 200 OK con la nota
+    @PostMapping
+    public Nota crearNota(@RequestBody Nota nota) {
+        return notaService.crearNota(nota);
     }
 
-    @PostMapping("/nota/crea")
-    public Nota creaNota(@RequestBody Nota nota) {
-        return repositorioNota.save(nota);
+    @PutMapping("/{id}")
+    public Nota actualizarNota(@PathVariable Integer id, @RequestBody Nota nota) {
+        nota.setId(id);
+        return notaService.actualizarNota(nota);
     }
+
+
 }
